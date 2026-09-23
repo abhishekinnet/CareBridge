@@ -1,0 +1,9 @@
+import { HeartHandshake, Mail, MapPin, Phone } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { CONTACT_CONFIG, emailHref, primaryPhoneHref, secondaryPhoneHref } from '../../config/contactConfig'
+
+export default function Footer() {
+  const quickLinks = [['Home', '/'], ['How We Help', '/#challenge'], ['Our Journey', '/#journey'], ['Services', '/#services'], ['About', '/#solution']]
+  const services = ['Doctor Guidance', 'Hospital Assistance', 'Home Healthcare', 'Nursing Support', 'Physiotherapy', 'Elderly Care', 'Follow-up Support']
+  return <footer id="footer" className="footer"><div className="footer-main"><div className="footer-about"><div className="footer-brand"><span className="brand-mark"><HeartHandshake size={22} /></span><strong>CareBridge</strong></div><p>Your healthcare journey, with someone by your side. CareBridge provides human assistance, care coordination and ongoing support for patients and families.</p></div><div><h3>Quick Links</h3><div className="footer-links">{quickLinks.map(([label, href]) => <a href={href} key={label}>{label}</a>)}<Link to="/contact">Contact</Link></div></div><div><h3>Our Services</h3><div className="footer-links">{services.map((service) => <span key={service}>{service}</span>)}</div></div><div><h3>Get in touch</h3><div className="footer-links contact-links"><a href={primaryPhoneHref}><Phone size={14} /> {CONTACT_CONFIG.primaryPhone}</a><a href={secondaryPhoneHref}><Phone size={14} /> +91 {CONTACT_CONFIG.secondaryPhone.slice(2)}</a><a href={emailHref}><Mail size={14} /> {CONTACT_CONFIG.email}</a><span><MapPin size={14} /> {CONTACT_CONFIG.location}</span></div></div></div><div className="footer-bottom"><span>© 2026 CareBridge. All Rights Reserved.</span><span>Privacy Policy &nbsp; | &nbsp; Terms & Conditions &nbsp; | &nbsp; Contact</span></div></footer>
+}
