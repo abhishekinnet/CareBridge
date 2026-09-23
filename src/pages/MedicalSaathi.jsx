@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import { ArrowLeft, ArrowRight, Check, CheckCircle2, MessageCircle, Phone, ShieldCheck } from 'lucide-react'
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { z } from 'zod'
 import Footer from '../components/layout/Footer'
@@ -36,8 +36,8 @@ export default function MedicalSaathi() {
   const [step, setStep] = useState(0)
   const [submitted, setSubmitted] = useState(false)
   const [deliveryReady, setDeliveryReady] = useState(false)
-  const { register, handleSubmit, trigger, setValue, watch, formState: { errors, isSubmitting } } = useForm({ resolver: zodResolver(schema), defaultValues: defaults, mode: 'onTouched' })
-  const form = watch()
+  const { control, register, handleSubmit, trigger, setValue, formState: { errors, isSubmitting } } = useForm({ resolver: zodResolver(schema), defaultValues: defaults, mode: 'onTouched' })
+  const form = useWatch({ control })
   const next = async () => { if (await trigger(steps[step][1])) setStep((current) => Math.min(current + 1, 4)) }
   const toggleSupport = (item) => setValue('support', form.support.includes(item) ? form.support.filter((support) => support !== item) : [...form.support, item], { shouldValidate: true })
   const submit = async (values) => { const result = await sendMedicalSaathiRequest(values); setDeliveryReady(result.delivered); setSubmitted(true); window.scrollTo({ top: 0, behavior: 'smooth' }) }
