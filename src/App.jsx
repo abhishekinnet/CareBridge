@@ -5,5 +5,6 @@ import ContactPage from './pages/ContactPage'
 import './App.css'
 
 export default function App() {
-  return <BrowserRouter><Routes><Route path="/" element={<LandingPage />} /><Route path="/how-we-help" element={<LandingPage />} /><Route path="/our-journey" element={<LandingPage />} /><Route path="/services" element={<LandingPage />} /><Route path="/about" element={<LandingPage />} /><Route path="/medical-saathi" element={<MedicalSaathi />} /><Route path="/contact" element={<ContactPage />} /></Routes></BrowserRouter>
+  const basename = import.meta.env.BASE_URL.replace(/\/$/, '')
+  return <BrowserRouter basename={basename}><Routes><Route path="/" element={<LandingPage />} /><Route path="/how-we-help" element={<LandingPage />} /><Route path="/our-journey" element={<LandingPage />} /><Route path="/services" element={<LandingPage />} /><Route path="/about" element={<LandingPage />} /><Route path="/medical-saathi" element={<MedicalSaathi />} /><Route path="/contact" element={<ContactPage />} /></Routes></BrowserRouter>
 }
